@@ -7,37 +7,92 @@
 #include <conio.h>
 using namespace std;
 
+// login user, login pass, register, quiz,       (cin.ignore)
 
-	void Account();
+	void EditAccountInfo();	
+	
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	
+	void FirstOption();
+	
+	// FIRST OPTION
+	void Login();
 	void Register();
+	void Information();
+	void Logout();
+	
+	void SecondOption();
+		
+	// SECOND OPTION
+	void UserName();
+	void UserPass();
+	
+	// THIRD 
 	void Quiz();
 	void QuizVer2();
-	void Login();
-	void Reset();
-
-	int main () {
-		bool Repeater = true;
-		char Option;
-
-	cout << "\n________________________________________________________________________________________________________________________\n\n";
-	cout << "\n                                        Hello user! Welcome to my Simple Program\n";
-	cout << "\n\n_____________________________________________________ Main Menu ________________________________________________________\n\n\n";
-	cout << " Choices:\n\n";
-	cout << " 1 - Account\n";
-	cout << " 2 - Login\n";
-	cout << " 3 - Register\n";
-	cout << " 4 - Short Quiz\n";
-	cout << " 5 - Reset Prog\n";
-	cout << " 6 - Exit\n";
-
-	cout << "\n User Input (Input only 1 character): ";
-	cin >> Option;
-	cout << endl;
 	
+	// FOURTH
+	
+	int main () {
+		system("cls");
+		bool Repeater = true;
+		string Option;
+		fstream DatabaseOutput, DatabseVerification;
+		string store, name; 
+		int verification;
+		
+		DatabaseOutput.open("Database.Output.text");
+		
+		if (!DatabaseOutput.is_open()){
+			cout << "DatabaseOutput Error!";
+		}
+		
+				
+		DatabseVerification.open("Account.Verification.text");
+		
+		if (!DatabseVerification.is_open()){
+			cout << "DatabaseVerification Error!";
+		}
+		
+		DatabseVerification >> verification; 
+		DatabaseOutput >> store >> name;
+		
+	cout << "\n________________________________________________________________________________________________________________________\n\n";
+	cout << "\n                                        Hello ";
+	
+		if (verification == 22) {
+			cout << name;
+		}
+		else {
+			cout << "User!";
+		}
+		
+	cout << ", Welcome to my Simple Program\n";
+	cout << "\n\n_____________________________________________________ MAIN MENU ________________________________________________________\n";
+	cout << "\n Choices:\n\n";
+	cout << " 1. Account:\n";
+	cout << "    - Login\n";
+	cout << "    - Register\n";
+	cout << "    - Information\n";
+	cout << "    - Logout\n\n";
+
+	cout << " 2. Forgot:\n";
+	cout << "    - Username\n";
+	cout << "    - Password\n\n";
+	
+	cout << " 3. Short Quiz\n\n";
+
+	cout << " 0. Exit\n\n";
+
+	cout << "\n\n\n Enter: ";
+	getline(cin,Option);
+	cout << endl;
+
+/*
 	do {
 		if (isdigit(Option) == true){
 			Repeater = true;
-//			cout << " Working";
+			cout << " Working";
 		}
 		else {
 			Repeater = false;
@@ -46,61 +101,108 @@ using namespace std;
 		}  
 		
 	}while (!Repeater);
+*/
 	
 	
-	switch (Option) {
 		
-		case '1':
-			Account();
-			break;	
-			
-		case '2':
-			Login ();	
-			break;
+		if (Option == "0"){
+			system("cls");
+			return 0;
+		}
 		
-		case '3':
-			Register();
-			break;
+		else if (Option == "1"){
+			FirstOption();
+		}
 		
-		case '4':
+		else if (Option == "2"){
+			SecondOption();
+		}
+		
+		else if (Option == "3"){
 			Quiz();
-			break;
-		
-		case '5':
-			Reset();
-			break;
-		
-		case '6':
-			break;
+		}
 
-		default:
-		cout<< " \n Error!";
+		else {
+		
+			system("cls");
+			cout << "\n________________________________________________________________________________________________________________________\n\n";
+			cout << "\n                                        Hello ";
+	
+		if (verification == 22) {
+			cout << name;
+		}
+		else {
+			cout << "User!";
+		}
+		
+	cout << ", Welcome to my Simple Program\n";
+	cout << "\n\n_____________________________________________________ MAIN MENU ________________________________________________________\n";
+	cout << "\n Choices:\n\n";
+	cout << " 1. Account:\n";
+	cout << "    - Login\n";
+	cout << "    - Register\n";
+	cout << "    - Information\n";
+	cout << "    - Logout\n\n";
+
+	cout << " 2. Forgot:\n";
+	cout << "    - Username\n";
+	cout << "    - Password\n\n";
+	
+	cout << " 3. Short Quiz\n\n";
+
+	cout << " 0. Exit\n\n";
+
+	cout << "\n\n\n Error! Wrong Input!";
 		
 		sleep (1);
-			cout << "\n\n This Program will Reset in";
-			cout << endl << " 3";
-			sleep (1);
-			cout << endl << " 2";
-			sleep (1);
-			cout << endl << " 1";
-			sleep (1);
-			system("cls");
-			main ();
-	}
+		system("cls");
+		main ();
+	}	
+		
+	DatabaseOutput.close();
+	DatabseVerification.close();
+}			
 	
-	system("cls");
-	
-	return 0;
-}
 
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-	void Account() {
+/*	void EditAccountInfo() {
+		
+
+		
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		
+	}
+*/
+	
+	
+	void Information() {
+		
 	ifstream AccountVerification, DatabaseOutput, DatabaseQuizScore;
 	int enter;
 	int Verification;
-	int Option;
-	string Store, Store1, Store2, Store3;
+	string Option;
+//	string Store, Store1, Store2, Store3;
 	
 	system("cls");
 	
@@ -125,6 +227,11 @@ using namespace std;
 	if (Verification == 22){
 		cout <<"\n_________________________________________________ Account Information __________________________________________________\n\n\n\n"<< endl << endl;
 
+	string Output;
+	while (getline(DatabaseOutput, Output)){
+		cout << Output << endl;
+	}
+/*
 	string infor[]= {	"\n Fullname    :" ,
 					"\n Birthdate   :",
 			  		"\n Gender      :",
@@ -176,14 +283,14 @@ using namespace std;
 				break;
 			}
 	}
-	
+*/
 
 	cout << endl << endl << endl << endl << endl << endl;
-	cout << "\t\t\t\t\t\t\t\t\t\t\t   Press Enter to continue.";
+	cout << "\n\n\t\t\t\t\t\t\t\t\t\t\t   Press Enter to continue.";
 		while ( enter != 13){
 			enter=getch();
 		}
-		
+	
 	system ("cls");
 	main ();	
 	}
@@ -191,27 +298,34 @@ using namespace std;
 		cout << "\n________________________________________________________________________________________________________________________\n\n";
 		cout << "\n                              You do not have an account, Please register or login first.\n";
 		cout << "\n\n_____________________________________________________ ACCOUNT __________________________________________________________\n\n\n";
-		cout << " Choices: \n\n 1 - Login  \n 2 - Register  \n 0 - Main Menu   \n\n User Input (Input only 1 character): ";
-		cin >> Option;
+		cout << " Choices: \n\n 1 - Login  \n 2 - Register  \n 0 - Main Menu   \n\n\n\n\n\n\n\n\n\n\n\n\n\n Enter: ";
+		getline(cin, Option);
 		
-		switch (Option) {
 			
-			case 1:
+			if ( Option == "1"){
 				Login();
-			break;
+			}
 			
-			case 2:
+			else if ( Option == "2"){
 				Register();
-			break;
+			}
 			
-			case 0:
+			else if ( Option == "0"){
 				system("cls");
 				main ();
-			break;
+			}
 			
-			default:
-			cout << " Please enter a valid number";
-		}
+			else {
+				
+			system("cls");
+			cout << "\n________________________________________________________________________________________________________________________\n\n";
+			cout << "\n                              You do not have an account, Please register or login first.\n";
+			cout << "\n\n_____________________________________________________ ACCOUNT __________________________________________________________\n\n\n";
+			cout << " Choices: \n\n 1 - Login  \n 2 - Register  \n 0 - Main Menu   \n\n\n\n\n\n\n\n\n\n\n\n\n\n Error! Invalid Input!";
+			sleep(1);
+			Information();
+			}
+		
 	}
 	
 	AccountVerification.close();
@@ -222,6 +336,7 @@ using namespace std;
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 	void Register() {
+		
 		system("cls");
 		int Option = 0;
 		int enter;
@@ -243,34 +358,38 @@ using namespace std;
 		if (!DatabaseAccounts.is_open()) {
 		cout << "DatabaseAccounts Error!";
 		}
-		cin.ignore();
+		
 		
 		cout << "\n\n    First name: "; 
+		cin >> ws;
 		getline (cin,First);
 		cout << " ______________________________________________________________________________________________________________________\n";
-
 		cout << "                                                                                                                    ";
 		cout << "        Middle name: ";
-		cin >> Middle;
+		cin >> ws;
+		getline (cin,Middle);
 		cout << "\n ______________________________________________________________________________________________________________________\n";
 		cout << "                                                                                                                    ";
 		cout << "        Last name: ";
-		cin >> Last;
+		cin >> ws;
+		getline (cin, Last);
 		cout << "\n ______________________________________________________________________________________________________________________\n";
-		cin.ignore();
 		cout << "                                                                                                                    \n";
 		cout << "    Birthdate: ";
-		getline(cin, Birth);
+		cin >> ws;
+		getline (cin, Birth);
 		cout << "\n ______________________________________________________________________________________________________________________\n";
 		cout << "                                                                                                                    \n";
 		cout << "    Gender: ";
-		cin >> Sex;
+		cin >> ws;
+		getline (cin,Sex);
 		cout << "\n ______________________________________________________________________________________________________________________\n";
 		cout << "                                                                                                                    \n";
 		cout << "    Email: ";
-		cin >> Email;
+		cin >> ws;
+		getline (cin,Email);
 
-		cout << "\n\t\t\t\t\t\t\t\t\t\t   Please press Enter to Continue";
+		cout << "\n\n\t\t\t\t\t\t\t\t\t\t\t   Press Enter to Continue";
 		enter = 1;
 			while ( enter != 13){
 				enter=getch();
@@ -294,12 +413,13 @@ using namespace std;
 		cin >> Pass;
 		cout << "\t\t\t\t\t |_________________________________|\n";
 		
-		DatabaseOutput << "Fullname: " << First << " " << Middle << " " << Last << endl 
-			<< "Birthdate: "<< Birth << endl
-			<< "Gender: " << Sex << endl
-			<< "Email: " << Email << endl
-			<< "Username: " << Username << endl 
-			<< "Password: " << Pass << endl;
+		DatabaseOutput 
+			<< " Fullname:   " << First << " " << Middle << " " << Last << endl << endl
+			<< " Birthdate:  "<< Birth << endl << endl
+			<< " Gender:     " << Sex << endl << endl 
+			<< " Email:      " << Email << endl << endl << endl
+			<< " Username:   " << Username << endl << endl
+			<< " Password:   " << Pass << endl << endl;
 			 
 		
 		cout <<"\n\n\n\n\n\n\n\n\n\n\n\n";
@@ -309,7 +429,8 @@ using namespace std;
 		DatabaseOutput.close();
 		DatabaseAccounts.close();
 		
-		cout << "\n\t\t\t\t\t\t\t\t\t\t   Press Enter to go to the Main Menu.";
+		cout << "\n\t\t\t\t\t\t\t\t\t\t\t   Press Enter to continue";
+		cin.ignore();
 		enter = 1;
 			while ( enter != 13){
 				enter=getch();
@@ -322,6 +443,7 @@ using namespace std;
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------	
 	
 	void Quiz() {
+		
 	ifstream AccountVerification;
 	ofstream QuizOutput;
 	char CorrectAns [5]= {'A', 
@@ -395,24 +517,26 @@ if (Verification == 22) {
 					
 				}
 		}
-		
-//			while (UserAns [y] != 97 || UserAns [y] != 98 || UserAns [y] != 99){
-//				cout << endl << UserAns [y];
-//				UserAns[y]=getch();
-//			
+
+/*
+			while (UserAns [y] != 97 || UserAns [y] != 98 || UserAns [y] != 99){
+				cout << endl << UserAns [y];
+				UserAns[y]=getch();
+*/		
 		
 
-	cout << "\n\n\t\t\t\t\t\t\t\t\t\t\t   Press Enter to continue";
+	cout << "\n\n\n\t\t\t\t\t\t\t\t\t\t\t   Press Enter to continue";
 	enter = 1;
 		while ( enter != 13){
 			enter=getch();
 		}
 	
 	system("cls");
-	cout << "________________________________________________________________________________________________________________________\n\n";
-	cout << " Do you wish to see your Score and Answers?";
-	cout << "  YES - 1  NO - 0";
-	cout << "\n Input: ";
+	cout << "\n________________________________________________________________________________________________________________________\n\n";
+	cout << "\n                                       Do you wish to see your Score and Answers?.\n";
+	cout << "\n\n_____________________________________________________ RESULT __________________________________________________________\n\n\n";
+	cout << " Choices: \n\n 1 - Yes \n 0 - No";
+	cout << "\n\n User input: ";
 	
 	
 		while (true){
@@ -435,12 +559,13 @@ if (Verification == 22) {
 		switch (ExamOption) {
 		
 			case '0':
+				
+/*
 				system("cls");	
-			
 				cout << "________________________________________________________________________________________________________________________";
 				cout << "\n\n Edi Don't\n\n";
 				sleep (2);
-				cout << " Redirecting to Home tab in";
+				cout << " Redirecting to Main Menu in";
 				sleep (1);
 				cout << endl << " 3";
 				sleep (1);
@@ -448,14 +573,19 @@ if (Verification == 22) {
 				sleep (1);
 				cout << endl << " 1";
 				sleep (1);
+*/
+
 				system("cls");
 				main ();
 			break;	
 					
 			case '1':
 				system("cls");
-				cout << "________________________________________________________________________________________________________________________";
-				cout << "\n\n Your Answers: \n\n";
+				cout << "\n________________________________________________________________________________________________________________________\n\n";
+				cout << "\n                                                   Q U I Z   R E S U L T\n";
+				cout << "\n\n________________________________________________________________________________________________________________________\n";
+				cout << "\n Your Answers: \n\n";
+				
 				for (int m = 0; m < 5; m++) {
 					if ( UserAns [m] == CorrectAns [m] ) {
 						cout << " " << Numbering <<". " << UserAns[m] <<" - Correct   " <<endl;
@@ -477,12 +607,12 @@ if (Verification == 22) {
 				}
 				
 				cout << "\n With the score of "<< score << "/5";
-				cout << endl<< endl<< endl<< endl<< endl<< endl<< endl<< endl;
+				cout << endl<< endl;
 			
 			
 				int Numbering = 1;
 				
-				cout << " Correct Answers:\n\n";
+				cout << " Correct Answers:\n";
 			
 				for (int o = 0; o < 5; o++) {
 	
@@ -507,7 +637,7 @@ if (Verification == 22) {
 		QuizOutput << score << "/5";
 		QuizOutput.close();
 }
-	
+
 	else {
 	
 	system("cls");
@@ -527,17 +657,18 @@ if (Verification == 22) {
 			case 3:
 				Register();
 			case 0:
+				cin.ignore();
 				system("cls");
 				main();
 				break;
 		}
 	
 	}
-	
+
 	AccountVerification.close();
 	
 		cout << endl;
-		cout <<"\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tPlease press Enter to go the main tab";
+		cout <<"\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t   Press Enter to continue.";
 	enter = 1;
 		while ( enter != 13){
 			enter=getch();
@@ -550,10 +681,11 @@ if (Verification == 22) {
 
 
 void QuizVer2(){
+	
 	char CorrectAns [5]= {'A', 
-					  'B', 
-					  'C', 
-				  	  'B', 
+					  'A', 
+					  'A', 
+				  	  'A', 
 					  'B'};
 	char UserAns [5];
 	int Choices, Output;
@@ -565,11 +697,11 @@ void QuizVer2(){
 	int x = 0;
 	char ExamOption;
 	int Numbering = 1;
-	string questions [5]{" 1. What do you call these: int, float, double?         A. Data Type \t B. Hatdog \t C. Chicken", 
-					 " 2. How do you describe Frewen?                         A. Letter C. \t B. Pogi \t C. Letter B.", 
-					 " 3. What is C++?                                        A. Peanuts \t B. Coconut \t C. Programing Language",
-					 " 4. Is HTML a programing language?                      A. Yes \t         B. No \t         C. I Don't Know", 
-					 " 5. What is the English word for tama?                  A. False \t B. True \t C. ayoko nga"};
+	string questions [5]{" 1. Array indexes start with?                          A. 0 \t          B. 1\t           C. 9", 
+					 " 5. Which keyword is used to create a class in C++?    A. class \t  B. class()\t   C. class();", 
+					 " 2. How do you call a function in C++?                 A. FuncName();\t  B. VarName();\t   C. function(); ",
+					 " 4. Which statement is used to stop a loop?            A. break \t  B. linebreak \t   C. continue", 
+					 " 3. How do you create a reference variable             A. * \t          B. &     \t   C. %\n    of an existing variable?"};
 					 
 	system("cls");
 	cout << "________________________________________________________________________________________________________________________\n";
@@ -624,10 +756,11 @@ void QuizVer2(){
 		}
 	
 	system("cls");
-	cout << "________________________________________________________________________________________________________________________\n\n";
-	cout << " Do you wish to see your Score and Answers?";
-	cout << "  YES - 1  NO - 0";
-	cout << "\n Input: ";
+	cout << "\n________________________________________________________________________________________________________________________\n\n";
+	cout << "\n                                       Do you wish to see your Score and Answers?.\n";
+	cout << "\n\n_____________________________________________________ RESULT __________________________________________________________\n\n\n";
+	cout << " Choices: \n\n 1 - Yes \n 0 - No";
+	cout << "\n\n User input: ";
 	
 	
 		while (true){
@@ -650,12 +783,13 @@ void QuizVer2(){
 		switch (ExamOption) {
 		
 			case '0':
+				
+/*
 				system("cls");	
-			
 				cout << "________________________________________________________________________________________________________________________";
 				cout << "\n\n Edi Don't\n\n";
 				sleep (2);
-				cout << " Redirecting to Home tab in";
+				cout << " Redirecting to Main Menu in";
 				sleep (1);
 				cout << endl << " 3";
 				sleep (1);
@@ -663,14 +797,20 @@ void QuizVer2(){
 				sleep (1);
 				cout << endl << " 1";
 				sleep (1);
+*/
+
+				cin.ignore();
 				system("cls");
 				main ();
 			break;	
 					
 			case '1':
 				system("cls");
-				cout << "________________________________________________________________________________________________________________________";
-				cout << "\n\n Your Answers: \n\n";
+				cout << "\n________________________________________________________________________________________________________________________\n\n";
+				cout << "\n                                                   Q U I Z   R E S U L T\n";
+				cout << "\n\n________________________________________________________________________________________________________________________\n";
+				cout << "\n Your Answers: \n\n";
+				
 				for (int m = 0; m < 5; m++) {
 					if ( UserAns [m] == CorrectAns [m] ) {
 						cout << " " << Numbering <<". " << UserAns[m] <<" - Correct   " <<endl;
@@ -691,9 +831,8 @@ void QuizVer2(){
 					}
 				}
 				
-				cout << "\n With the score of "<< score << "/5";
-				cout << endl<< endl<< endl<< endl<< endl<< endl<< endl<< endl;
-			
+				cout << "\n With the score of "<< score << "/5\n\n";
+	
 			
 				int Numbering = 1;
 				
@@ -711,6 +850,8 @@ void QuizVer2(){
 						Numbering++;
 					}
 				}
+				
+				cin.ignore(); // don't know
 		}
 }
 
@@ -749,6 +890,7 @@ void QuizVer2(){
 		
 		if (Username != UsernameChecker) {
 			cout << "\n\t\t\t       Wrong Username. make sure you enter the right username.";
+			cin.ignore();
 			cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\t\t\t\t   Press Enter to continue.";
 		enter = 1;
 			while ( enter != 13){
@@ -768,6 +910,7 @@ void QuizVer2(){
 		
 		if (Password != PasswordChecker) {
 			cout << "\n\t\t\t       Wrong Password. make sure you enter the right password.";
+			cin.ignore();
 			cout << "\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\t\t\t\t   Press Enter to continue.";
 		enter = 1;
 			while ( enter != 13){
@@ -777,7 +920,7 @@ void QuizVer2(){
 		main ();
 		}
 		
-		cout << "\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\t\t\t\t   Press Enter to Continue.";
+		cout << "\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\t\t\t\t   Press Enter to Continue.";
 		enter = 1;
 			while ( enter != 13){
 				enter=getch();
@@ -785,17 +928,17 @@ void QuizVer2(){
 		
 		system("cls");
 		cout << "\n________________________________________________________________________________________________________________________\n\n\n";
-		cout << "                              After this, you'll be able to access your account information\n";
+		cout << "                              After this, you'll be able to access your account informations\n";
 		cout << "\n\n______________________________________________________ LOG-IN _________________________________________________________\n\n\n";
 		cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n Please wait a moment...";
-		sleep (5);
+		sleep (3);
 		
 		system("cls");
 		cout << "\n________________________________________________________________________________________________________________________\n\n\n";
 		cout << "                              After this, you'll be able to access your account information\n";
 		cout << "\n\n______________________________________________________ LOG-IN _________________________________________________________\n\n\n";
-		cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n You Succesfully login your account! \t\t\t\t\t\t\t   Press Enter to continue.";
-		sleep (2);
+		cin.ignore();
+		cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n You Succesfully logged in your account! \t\t\t\t\t\t   Press Enter to continue.";
 		
 		Verification << 22;
 		
@@ -806,15 +949,19 @@ void QuizVer2(){
 				enter=getch();
 			}
 		system("cls");
-		main ();
-	
+		main();
+		sleep(1);
 	}	
 	
+//                           			                                                    LOG OUT
 	
-	
-		void Reset(){
+	void Logout(){
+		
+		ifstream AccountVerification;
 		ofstream Verification, QuizScore;	
-		int enter;
+		string enter, Option;
+		int Verification1;
+		
 		Verification.open("Account.Verification.text");
 				
 		if (!Verification.is_open()) {
@@ -827,34 +974,268 @@ void QuizVer2(){
 			cout << "QuizScore Error!";
 		}
 		
-		Verification << 100;
-		QuizScore << "NoRecord";
+		AccountVerification.open("Account.Verification.text");
+
+		if (!AccountVerification.is_open()) {
+		cout << "AccountVerification Error!";
+		}
+		
+		AccountVerification >> Verification1;
+		
+		if (Verification1 == 22) {
+		
+		system("cls");
+		cout << "\n________________________________________________________________________________________________________________________\n\n\n";
+		cout << "                                     Are you sure you want to logout your account?\n";
+		cout << "\n\n________________________________________________________________________________________________________________________\n\n";
+		cout << " Choices:\n\n 1 - Yes\n 2 - No\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n Enter: ";
+		getline(cin, enter);
+		
+		if ( enter == "1" ){
+			
+			Verification << 100;
+			QuizScore << "NoRecord";
+			main();
+		}
+		
+		else if ( enter == "2"){
+			main();
+		}
+		
+		else {
+			
+		system("cls");
+		cout << "\n________________________________________________________________________________________________________________________\n\n\n";
+		cout << "                                     Are you sure you want to logout your account?\n";
+		cout << "\n\n________________________________________________________________________________________________________________________\n\n";
+		cout << " Choices:\n\n 1 - Yes\n 2 - No\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
+		cout << " Error! Wrong input!";
+		sleep(1);
+		Logout();
+		}
+				cin.ignore();
+		
 		
 		Verification.close();
 		QuizScore.close();
 		
 		cout << "\n\n\n\n\n\n\n\n\n\n\n\n Plese wait a moment...";
-			
-		for (int x = 1; x <= 101; x+=1){
-			system("cls");
-			sleep(0.1);
-				cout <<"\n________________________________________________________________________________________________________________________\n\n";
-				cout << "\n                                        Hello user! Welcome to my Simple Program\n";
-				cout << "\n\n_____________________________________________________ Main Menu ________________________________________________________\n\n\n";
-				cout << " Choices:\n\n";
-				cout << " 1 - Account\n";
-				cout << " 2 - Login\n";
-				cout << " 3 - Register\n";
-				cout << " 4 - Short Quiz\n";
-				cout << " 5 - Reset Prog\n";
-				cout << " 6 - Exit\n";
-			cout << "\n\n\n\n\n\n\n\n\n\n " << x <<"% Complete!";
 		}
 		
-		cout << "    Loading Complete";
-		sleep(1);
+		else {
+			
+		system("cls");
+		cout << "\n________________________________________________________________________________________________________________________\n\n";
+		cout << "\n                              You do not have an account, Please register or login first.\n";
+		cout << "\n\n_____________________________________________________ ACCOUNT __________________________________________________________\n\n\n";
+		cout << " Choices: \n\n 1 - Login  \n 2 - Register  \n 0 - Main Menu   \n\n\n\n\n\n\n\n\n\n\n\n\n\n Enter: ";
+		getline(cin, Option);
+		
+			
+			if ( Option == "1"){
+				Login();
+			}
+			
+			else if ( Option == "2"){
+				Register();
+			}
+			
+			else if ( Option == "0"){
+				system("cls");
+				main ();
+			}
+			
+			else {
+				
+			system("cls");
+			cout << "\n________________________________________________________________________________________________________________________\n\n";
+			cout << "\n                              You do not have an account, Please register or login first.\n";
+			cout << "\n\n_____________________________________________________ ACCOUNT __________________________________________________________\n\n\n";
+			cout << " Choices: \n\n 1 - Login  \n 2 - Register  \n 0 - Main Menu   \n\n\n\n\n\n\n\n\n\n\n\n\n\n Error! Invalid Input!";
+			sleep(1);
+			Information();
+			}
+		}
+			
+		
+		
+}
+		
+		
+	void UserName() {
+		
+		ifstream DatabseAccountIn;
+		ofstream DatabaseAccounts;
+		string Username;
+		string Store, Password;
+		
+		DatabaseAccounts.open("Database.Accounts.text");
+		
+		if (!DatabaseAccounts.is_open()){
+			cout << "DatabaseAccounts Error!";
+		}
+		
+				
+		DatabseAccountIn.open("Database.Accounts.text");
+		
+		if (!DatabseAccountIn.is_open()){
+			cout << "DatabseAccountIn Error!";
+		}
+		
+		DatabseAccountIn >> Store >> Password;
+		cout << Store << Password << "dsadsdsa";
 		
 		system("cls");
-		main ();
+		cout << "\n________________________________________________________________________________________________________________________\n\n";
+		cout << "\n                                         PLEASE ENTER YOUR NEW USERNAME\n";
+		cout << "\n\n_________________________________________________ FORGOT USERNAME ______________________________________________________\n";
 		
+		cout << "\n\n\n\n\n\n\t\t\t\t\t  _________________________________\n";	
+		cout << "\t\t\t\t\t |                                 |\n";
+		cout << "\t\t\t\t\t | Username: ";
+		cin >> Username;
+		cout << "\t\t\t\t\t |_________________________________|\n";
+	
+		DatabaseAccounts << Username << " " << Password;
+		DatabaseAccounts.close();
+		DatabseAccountIn.close();
+		int enter;
+		cout << "\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\t\t\t\t   Press Enter to continue";
+		
+		cin.ignore();
+		enter = 1;
+			while ( enter != 13){
+				enter=getch();
 		}
+		main();
+}
+	void UserPass() {
+		
+		ofstream DatabaseAccounts;
+		string Password;
+		
+		DatabaseAccounts.open("Database.Accounts.text");
+		
+		if (!DatabaseAccounts.is_open()){
+			cout << "DatabaseAccounts Error!";
+		}
+		
+		system("cls");
+		cout << "\n________________________________________________________________________________________________________________________\n\n";
+		cout << "\n                                         PLEASE ENTER YOUR NEW PASSWORD\n";
+		cout << "\n\n_________________________________________________ FORGOT PASSWORD ______________________________________________________\n";
+		
+		cout << "\n\n\n\n\n\n\t\t\t\t\t  _________________________________\n";	
+		cout << "\t\t\t\t\t |                                 |\n";
+		cout << "\t\t\t\t\t | Password: ";
+		cin >> Password;
+		cout << "\t\t\t\t\t |_________________________________|\n";
+	
+		DatabaseAccounts << endl << Password;
+		
+		int enter;
+		cout << "\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\t\t\t\t   Press Enter to continue";
+		
+		cin.ignore();
+		enter = 1;
+			while ( enter != 13){
+				enter=getch();
+		}
+		main();
+}
+	
+//                           			                                                    FIRST OPTION
+	
+	void FirstOption(){
+		
+		system("cls");
+		cout << "\n________________________________________________________________________________________________________________________\n\n";
+		cout << "\n                                         PLEASE CHOOSE FROM THE GIVEN CHOICES\n";
+		cout << "\n\n___________________________________________________ ACCOUNT MENU _______________________________________________________\n";
+		cout << "\n Choices:\n\n";
+		cout << " 1. Login\n";
+		cout << " 2. Register\n";
+		cout << " 3. Information\n";
+		cout << " 4. Logout\n";
+		cout << " 0. Main Menu\n\n";
+	
+	string Choices;
+	
+		cout << "\n\n\n\n\n\n\n\n\n\n\n Enter: ";
+		getline (cin, Choices);  
+	
+		if (Choices == "1") {
+			Login();
+		}
+			
+		else if (Choices == "2") {
+			Register();
+		}
+			
+		else if (Choices == "3") {
+			Information ();	
+		}
+			
+		else if (Choices == "4") {
+			Logout();
+		}
+			
+		else if (Choices == "0") {
+			main();
+		}
+		
+		else {
+			
+		system("cls");
+		cout << "\n________________________________________________________________________________________________________________________\n\n";
+		cout << "\n                                         PLEASE CHOOSE FROM THE GIVEN CHOICES\n";
+		cout << "\n\n___________________________________________________ ACCOUNT MENU _______________________________________________________\n";
+		cout << "\n Choices:\n\n";
+		cout << " 1. Login\n";
+		cout << " 2. Register\n";
+		cout << " 3. Information\n";
+		cout << " 4. Logout\n";
+		cout << " 0. Main Menu\n\n";
+	
+		cout << "\n\n\n\n\n\n\n\n\n\n\n Error! Wrong Input!";
+		sleep(1);
+		FirstOption();
+			
+		}
+	}
+
+
+//                       	                       		                                 SECOND OPTION
+
+	void SecondOption(){
+		
+		system("cls");
+		cout << "\n________________________________________________________________________________________________________________________\n\n";
+		cout << "\n                                         Please choose from the given choises\n";
+		cout << "\n\n___________________________________________________ FORGOT MENU _______________________________________________________\n";
+		cout << "\n Choices:\n\n";
+		cout << " 1. Username\n";
+		cout << " 2. Password\n";
+		cout << " 0. Main Menu\n\n";
+	
+	char Choices;
+	
+		cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n Enter: ";
+		cin >> Choices;
+	
+	switch (Choices) {
+		
+		case '1':
+			UserName();
+			break;
+			
+		case '2':
+			UserPass();
+			break;	
+			
+		case '0':
+			main();
+		break;
+	}
+	
+}
